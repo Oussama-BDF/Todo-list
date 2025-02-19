@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body class="d-flex align-items-center min-vh-100">
+  <div class="container">
+    <div class="content row g-0 shadow-lg rounded-3">
+
+      <div class="col-md-4">
+        <div class="sidebar p-4 bg-secondary h-100">
+          <h3 class="text-center text-primary mb-3">To-Do Lists <i class="fa-solid fa-list-check"></i></h3>
+
+          <form class="mb-3" id="listForm">
+            <div class="mb-2">
+              <input class="form-control form-control-sm" type="text" name="" id="listName" placeholder="Add new list ..."
+                required>
+            </div>
+            <button class="btn btn-sm btn-primary text-light w-100" type="submit">+ New List</button>
+          </form>
+
+          <ul class="list-unstyled row g-2" id="listsContainer">
+            <li class="taskList-item">
+              <div class="input-group input-group-sm">
+                <input type="text" class="list-name form-control" value="Study" aria-label="">
+                <button class="btn btn-outline-primary" type="button">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+                <button class="btn viewList" type="button">
+                  <span class="d-none"><i class="fa-solid fa-folder-open"></i></span>
+                  <span class=""><i class="fa-regular fa-folder"></i></span>
+                </button>
+              </div>
+            </li>
+            <li class="taskList-item">
+              <div class="input-group input-group-sm">
+                <input type="text" class="list-name form-control" value="Personal" aria-label="">
+                <button class="btn btn-outline-primary" type="button">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+                <button class="btn viewList" type="button">
+                  <span class="d-none"><i class="fa-solid fa-folder-open"></i></span>
+                  <span class=""><i class="fa-regular fa-folder"></i></span>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="main-content p-4 bg-white h-100">
+          <h3 class="mb-3">Study List</h3>
+
+          <form class="row g-2 mb-3" id="taskForm">
+            <div class="col">
+              <input type="text" name="" id="taskName" class="form-control form-control-sm" placeholder="Add new task ..."
+                required>
+            </div>
+            <div class="col-auto">
+              <select class="form-select form-select-sm bg-primary text-light" aria-label="Default select example">
+                <option selected value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-sm btn-primary text-light" type="submit">+ Add</button>
+            </div>
+          </form>
+
+          <ul class="list-unstyled row g-2" id="tasksContainer">
+            <li class="task-item">
+              <div class="input-group input-group-sm">
+                <div class="input-group-text">
+                  <input class="form-check-input mt-0" type="checkbox" value="" aria-label="">
+                </div>
+                <input type="text" class="form-control" value="Taks 1" aria-label="">
+                <button class="btn btn-outline-primary" type="button">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
+    integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

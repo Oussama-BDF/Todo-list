@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 1170px !important;
+}
+
+.content {
+    height: 80vh;
+    overflow: hidden;
+}
+
+.taskList-item .viewList {
+    border: 1px solid var(--bs-primary);
+    color: var(--bs-primary);
+}
+
+.taskList-item .viewList:hover,
+.taskList-item.active .viewList {
+    background-color: var(--bs-primary);
+    color: var(--bs-secondary);
+}
+
+.taskList-item.active .viewList span:last-child {
+    display: none;
+}
+
+.taskList-item.active .viewList span:first-child {
+    display: inline !important;
+}
