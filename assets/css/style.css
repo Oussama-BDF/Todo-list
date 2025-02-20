@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    width: 1170px !important;
+    width: 1050px !important;
 }
 
 .content {
@@ -11,21 +11,30 @@ body {
     overflow: hidden;
 }
 
-.taskList-item .viewList {
-    border: 1px solid var(--bs-primary);
-    color: var(--bs-primary);
+/* Side bar */
+.sidebar {
+    max-height: 100vh;
 }
 
-.taskList-item .viewList:hover,
-.taskList-item.active .viewList {
-    background-color: var(--bs-primary);
-    color: var(--bs-secondary);
+.sidebar-top {
+    backdrop-filter: blur(3px);
+    z-index: 1000;
 }
 
-.taskList-item.active .viewList span:last-child {
-    display: none;
+/* Task Lists Styling */
+.taskList-item.active,
+.taskList-item:hover,
+.taskList-item:not(.active) .circle.badge {
+    background-color: #294D3E !important;
 }
 
-.taskList-item.active .viewList span:first-child {
-    display: inline !important;
+.taskList-item.active .circle.badge,
+.taskList-item:hover .circle.badge {
+    background-color: var(--bs-primary) !important;
+}
+
+/* Tasks Styling */
+.task-box:has(.task-checkbox:checked) .task-name {
+    text-decoration: line-through;
+    color: gray;
 }
