@@ -34,25 +34,32 @@
 
           <ul class="list-group list-group-flush" id="listsContainer">
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light active" role='button'>
-              Study <span class="circle badge text-bg-secondary rounded-pill">6</span>
+              <span class="text text-truncate">Study</span>
+              <span class="circle badge text-bg-secondary rounded-pill">6</span>
             </li>
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              Work <span class="circle badge text-bg-secondary rounded-pill">18</span>
+              <span class="text text-truncate">Work</span>
+              <span class="circle badge text-bg-secondary rounded-pill">18</span>
             </li>
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              Religion <span class="circle badge text-bg-secondary rounded-pill">20</span>
+              <span class="text text-truncate">Religion</span>
+              <span class="circle badge text-bg-secondary rounded-pill">20</span>
             </li>
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              Personal <span class="circle badge text-bg-secondary rounded-pill">15</span>
+              <span class="text text-truncate">Personal</span>
+              <span class="circle badge text-bg-secondary rounded-pill">15</span>
             </li>
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              Home <span class="circle badge text-bg-secondary rounded-pill">3</span>
+              <span class="text text-truncate">Home</span>
+              <span class="circle badge text-bg-secondary rounded-pill">3</span>
             </li>
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              Sport <span class="circle badge text-bg-secondary rounded-pill">2</span>
+              <span class="text text-truncate">Sport</span>
+              <span class="circle badge text-bg-secondary rounded-pill">2</span>
             </li>
             <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              Others <span class="circle badge text-bg-secondary rounded-pill">5</span>
+              <span class="text text-truncate">Others</span>
+              <span class="circle badge text-bg-secondary rounded-pill">5</span>
             </li>
           </ul>
         </div>
@@ -60,22 +67,25 @@
 
       <div class="col-md-8 col-lg-9">
         <div class="main-content p-4 bg-white h-100">
-          <div class="d-inline-flex bg-dark text-white rounded-pill p-1 shadow align-items-center mb-3">
-            <input type="text" class="editable-input fw-bold text-center text-light bg-transparent border-0" value="Study" style="outline: none">
 
-            <div class="vr text-white"></div>
+          <div class="d-flex justify-content-between w-100 mb-3">
+            <div class="">
+              <input type="text" class="list-name form-control fw-bold text-dark bg-transparent border-0 fs-4 lh-1 px-1 py-0" value="Study">
+            </div>
 
-            <button class="btn btn-sm text-white lh-1">
-              <i class="fa-regular fa-trash-can"></i>
-              Delete List
-            </button>
+            <div class="d-inline-flex bg-dark rounded-pill p-1 shadow align-items-center">
+              <button class="btn btn-sm text-white lh-1">
+                <i class="fa-regular fa-trash-can"></i>
+                Delete List
+              </button>
 
-            <div class="vr text-white"></div>
+              <div class="vr text-white"></div>
 
-            <button type="button" class="btn btn-sm text-white lh-1" data-bs-toggle="modal" data-bs-target="#taskModal">
-              <i class="fa-solid fa-plus"></i>
-              New Task
-            </button>
+              <button type="button" class="btn btn-sm text-white lh-1" data-bs-toggle="modal" data-bs-target="#taskModal">
+                <i class="fa-solid fa-plus"></i>
+                New Task
+              </button>
+            </div>
           </div>
 
           <form class="row g-2 mb-3" id="taskForm">
@@ -88,18 +98,23 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                              <label for="modal-task-inpu" class="form-label">Task Name</label>
-                              <input type="text" id="modal-task-input" class="form-control" placeholder="Enter task..." required>
+                              <label for="task-input" class="form-label">Task Name</label>
+                              <input type="text" id="task-input" class="form-control" placeholder="Enter task..." required>
                             </div>
 
                             <div class="mb-3">
-                              <label for="modal-task-input" class="form-label">Task Priority</label>
-                              <select class="form-select" id="modal-task-input" name="" required>
+                              <label for="task-pre" class="form-label">Task Priority</label>
+                              <select class="form-select" id="task-pre" name="" required>
                                 <option value="" selected disabled>Select Priority</option>
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
                               </select>
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="task-notes" class="form-label">Notes</label>
+                              <textarea class="form-control" id="task-notes" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -115,85 +130,165 @@
             <li class="task-item">
               <div class="task-box input-group shadow rounded">
                 <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" value="" aria-label="">
+                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
                 </div>
-                <div class="form-floating">
-                  <input type="text" class="form-control fw-semibold task-name" value="Complete Math homework" id="floatingInputGroup1">
-                  <label class="small" for="floatingInputGroup1">
-                    Added: 2025-02-19 <span class="ms-1 bg-success text-white px-2 rounded">Low</span>
-                  </label>
-                </div>
-                <button class="btn btn-outline-secondary delete-task" type="button">
-                  <i class="fa-solid fa-xmark"></i>
+                <input type="text" class="form-control fw-semibold task-name" value="Complete Math homework">
+                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task1">
+                  <i class="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
+            
+              <div class="collapse mt-2" id="task1" data-bs-parent="#tasksContainer">
+                <div class="card border-0 shadow">
+                  <div class="card-body small">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
+                      <span class="badge bg-secondary">Uncompleted</span>
+                    </div>
+                    <hr class="my-2">
+                    <p class="mb-1 fw-semibold">Notes :</p>
+                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
+                    <hr class="my-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-success">Low</span></p>
+                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
+                        <i class="fa-solid fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-          
+            
             <li class="task-item">
               <div class="task-box input-group shadow rounded">
                 <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" value="" aria-label="">
+                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
                 </div>
-                <div class="form-floating">
-                  <input type="text" class="form-control fw-semibold task-name" value="Study for History test" id="floatingInputGroup1">
-                  <label class="small" for="floatingInputGroup1">
-                    Added: 2025-02-19 <span class="ms-1 bg-warning text-dark px-2 rounded">Medium</span>
-                  </label>
-                </div>
-                <button class="btn btn-outline-secondary delete-task" type="button">
-                  <i class="fa-solid fa-xmark"></i>
+                <input type="text" class="form-control fw-semibold task-name" value="Study for History test">
+                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task2">
+                  <i class="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
+            
+              <div class="collapse mt-2" id="task2" data-bs-parent="#tasksContainer">
+                <div class="card border-0 shadow">
+                  <div class="card-body small">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
+                      <span class="badge bg-secondary">Uncompleted</span>
+                    </div>
+                    <hr class="my-2">
+                    <p class="mb-1 fw-semibold">Notes :</p>
+                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
+                    <hr class="my-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-warning">Medium</span></p>
+                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
+                        <i class="fa-solid fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-          
+
             <li class="task-item">
               <div class="task-box input-group shadow rounded">
                 <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" value="" aria-label="">
+                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
                 </div>
-                <div class="form-floating">
-                  <input type="text" class="form-control fw-semibold task-name" value="Prepare project for Science class" id="floatingInputGroup1">
-                  <label class="small" for="floatingInputGroup1">
-                    Added: 2025-02-19 <span class="ms-1 bg-success text-white px-2 rounded">Low</span>
-                  </label>
-                </div>
-                <button class="btn btn-outline-secondary delete-task" type="button">
-                  <i class="fa-solid fa-xmark"></i>
+                <input type="text" class="form-control fw-semibold task-name" value="Prepare project for Science class">
+                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task3">
+                  <i class="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
+            
+              <div class="collapse mt-2" id="task3" data-bs-parent="#tasksContainer">
+                <div class="card border-0 shadow">
+                  <div class="card-body small">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
+                      <span class="badge bg-secondary">Uncompleted</span>
+                    </div>
+                    <hr class="my-2">
+                    <p class="mb-1 fw-semibold">Notes :</p>
+                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
+                    <hr class="my-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-success">Low</span></p>
+                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
+                        <i class="fa-solid fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-          
+
             <li class="task-item">
               <div class="task-box input-group shadow rounded">
                 <div class="input-group-text">
-                  <input checked class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" value="" aria-label="">
+                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" checked>
                 </div>
-                <div class="form-floating">
-                  <input type="text" class="form-control fw-semibold task-name" value="Attend study group for English" id="floatingInputGroup1">
-                  <label class="small" for="floatingInputGroup1">
-                    Added: 2025-02-19 <span class="ms-1 bg-danger text-white px-2 rounded">High</span>
-                  </label>
-                </div>
-                <button class="btn btn-outline-secondary delete-task" type="button">
-                  <i class="fa-solid fa-xmark"></i>
+                <input type="text" class="form-control fw-semibold task-name" value="Attend study group for English">
+                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task4">
+                  <i class="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
+            
+              <div class="collapse mt-2" id="task4" data-bs-parent="#tasksContainer">
+                <div class="card border-0 shadow">
+                  <div class="card-body small">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
+                      <span class="badge bg-secondary">Completed</span>
+                    </div>
+                    <hr class="my-2">
+                    <p class="mb-1 fw-semibold">Notes :</p>
+                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
+                    <hr class="my-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-danger">High</span></p>
+                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
+                        <i class="fa-solid fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
-          
+
             <li class="task-item">
               <div class="task-box input-group shadow rounded">
                 <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" value="" aria-label="">
+                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
                 </div>
-                <div class="form-floating">
-                  <input type="text" class="form-control fw-semibold task-name" value="Complete extra credit assignment" id="floatingInputGroup1">
-                  <label class="small" for="floatingInputGroup1">
-                    Added: 2025-02-19 <span class="ms-1 bg-success text-white px-2 rounded">Low</span>
-                  </label>
-                </div>
-                <button class="btn btn-outline-secondary delete-task" type="button">
-                  <i class="fa-solid fa-xmark"></i>
+                <input type="text" class="form-control fw-semibold task-name" value="Complete extra credit assignment">
+                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task5">
+                  <i class="fa-solid fa-chevron-down"></i>
                 </button>
+              </div>
+            
+              <div class="collapse mt-2" id="task5" data-bs-parent="#tasksContainer">
+                <div class="card border-0 shadow">
+                  <div class="card-body small">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
+                      <span class="badge bg-secondary">Uncompleted</span>
+                    </div>
+                    <hr class="my-2">
+                    <p class="mb-1 fw-semibold">Notes :</p>
+                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
+                    <hr class="my-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-success">Low</span></p>
+                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
+                        <i class="fa-solid fa-trash"></i> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -201,7 +296,6 @@
       </div>
     </div>
   </div>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
     integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="

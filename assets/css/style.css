@@ -38,3 +38,8 @@ body {
     text-decoration: line-through;
     color: gray;
 }
+
+.list-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
