@@ -22,14 +22,14 @@ body {
 }
 
 /* Task Lists Styling */
-.taskList-item.active,
-.taskList-item:hover,
-.taskList-item:not(.active) .circle.badge {
+.list-item.active,
+.list-item:hover,
+.list-item:not(.active) .circle.badge {
     background-color: #294D3E !important;
 }
 
-.taskList-item.active .circle.badge,
-.taskList-item:hover .circle.badge {
+.list-item.active .circle.badge,
+.list-item:hover .circle.badge {
     background-color: var(--bs-primary) !important;
 }
 
@@ -39,7 +39,7 @@ body {
     color: gray;
 }
 
-.list-name {
+.list-heading {
     white-space: nowrap;
     text-overflow: ellipsis;
 }

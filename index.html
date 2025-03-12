@@ -16,15 +16,15 @@
   <div class="container">
     <div class="content row g-0 shadow-lg rounded-3">
 
-      <div class="col-md-4 col-lg-3">
-        <div class="sidebar px-3 pb-4 bg-secondary h-100 overflow-auto">
+      <div class="col-md-4 col-lg-3 h-100">
+        <div class="sidebar px-3 pb-4 bg-secondary h-100 overflow-y-auto">
 
           <div class="sidebar-top position-sticky top-0 mb-3">
             <h3 class="text-center text-primary mb-3 pt-4 h4">To-Do Lists <i class="fa-solid fa-list-check"></i></h3>
 
             <form class="" id="listForm">
               <div class="input-group input-group-sm">
-                <input type="text" class="form-control" name="" id="listName" placeholder="Add new list ..." aria-label="Example text with button addon" aria-describedby="button-addon1" required>
+                <input type="text" class="form-control" name="" id="listInput" placeholder="Add new list ..." aria-label="Example text with button addon" aria-describedby="button-addon1" required>
                 <button class="btn btn-sm btn-primary text-secondary d-flex align-items-center" type="submit" id="button-addon1">
                   <i class="fa-solid fa-plus"></i>
                 </button>
@@ -32,48 +32,23 @@
             </form>
           </div>
 
-          <ul class="list-group list-group-flush" id="listsContainer">
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light active" role='button'>
-              <span class="text text-truncate">Study</span>
-              <span class="circle badge text-bg-secondary rounded-pill">6</span>
-            </li>
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              <span class="text text-truncate">Work</span>
-              <span class="circle badge text-bg-secondary rounded-pill">18</span>
-            </li>
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              <span class="text text-truncate">Religion</span>
-              <span class="circle badge text-bg-secondary rounded-pill">20</span>
-            </li>
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              <span class="text text-truncate">Personal</span>
-              <span class="circle badge text-bg-secondary rounded-pill">15</span>
-            </li>
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              <span class="text text-truncate">Home</span>
-              <span class="circle badge text-bg-secondary rounded-pill">3</span>
-            </li>
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              <span class="text text-truncate">Sport</span>
-              <span class="circle badge text-bg-secondary rounded-pill">2</span>
-            </li>
-            <li class="taskList-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light" role='button'>
-              <span class="text text-truncate">Others</span>
-              <span class="circle badge text-bg-secondary rounded-pill">5</span>
-            </li>
-          </ul>
+          <ul class="list-group list-group-flush" id="listsContainer"></ul>
         </div>
       </div>
 
-      <div class="col-md-8 col-lg-9">
-        <div class="main-content p-4 bg-white h-100">
+      <div class="col-md-8 col-lg-9 h-100">
+        <div class="main-content p-4 bg-white h-100 overflow-y-auto">
 
           <div class="d-flex justify-content-between w-100 mb-3">
-            <div class="">
-              <input type="text" class="list-name form-control fw-bold text-dark bg-transparent border-0 fs-4 lh-1 px-1 py-0" value="Study">
+
+            <div class="input-group w-auto">
+              <label for="listHeading" class="input-group-text rounded-start-pill" role="button">
+                <i class="fa-solid fa-pencil"></i>
+              </label>
+              <input type="text" id="listHeading" class="rounded-end-pill list-heading form-control fw-bold text-dark bg-transparent fs-4 px-2 py-0" value="">
             </div>
 
-            <div class="d-inline-flex bg-dark rounded-pill p-1 shadow align-items-center">
+            <div class="d-inline-flex bg-secondary rounded-pill p-1 shadow align-items-center">
               <button class="btn btn-sm text-white lh-1">
                 <i class="fa-regular fa-trash-can"></i>
                 Delete List
@@ -98,13 +73,13 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                              <label for="task-input" class="form-label">Task Name</label>
-                              <input type="text" id="task-input" class="form-control" placeholder="Enter task..." required>
+                              <label for="taskInput" class="form-label">Task Name</label>
+                              <input type="text" id="taskInput" class="form-control" placeholder="Enter task..." required>
                             </div>
 
                             <div class="mb-3">
-                              <label for="task-pre" class="form-label">Task Priority</label>
-                              <select class="form-select" id="task-pre" name="" required>
+                              <label for="taskPre" class="form-label">Task Priority</label>
+                              <select class="form-select" id="taskPre" name="" required>
                                 <option value="" selected disabled>Select Priority</option>
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
@@ -113,8 +88,8 @@
                             </div>
 
                             <div class="mb-3">
-                              <label for="task-notes" class="form-label">Notes</label>
-                              <textarea class="form-control" id="task-notes" rows="3"></textarea>
+                              <label for="taskNotes" class="form-label">Notes</label>
+                              <textarea class="form-control" id="taskNotes" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -126,172 +101,7 @@
             </div>
           </form>
 
-          <ul class="list-unstyled row g-2" id="tasksContainer">
-            <li class="task-item">
-              <div class="task-box input-group shadow rounded">
-                <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
-                </div>
-                <input type="text" class="form-control fw-semibold task-name" value="Complete Math homework">
-                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task1">
-                  <i class="fa-solid fa-chevron-down"></i>
-                </button>
-              </div>
-            
-              <div class="collapse mt-2" id="task1" data-bs-parent="#tasksContainer">
-                <div class="card border-0 shadow">
-                  <div class="card-body small">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
-                      <span class="badge bg-secondary">Uncompleted</span>
-                    </div>
-                    <hr class="my-2">
-                    <p class="mb-1 fw-semibold">Notes :</p>
-                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
-                    <hr class="my-2">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-success">Low</span></p>
-                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
-                        <i class="fa-solid fa-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            
-            <li class="task-item">
-              <div class="task-box input-group shadow rounded">
-                <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
-                </div>
-                <input type="text" class="form-control fw-semibold task-name" value="Study for History test">
-                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task2">
-                  <i class="fa-solid fa-chevron-down"></i>
-                </button>
-              </div>
-            
-              <div class="collapse mt-2" id="task2" data-bs-parent="#tasksContainer">
-                <div class="card border-0 shadow">
-                  <div class="card-body small">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
-                      <span class="badge bg-secondary">Uncompleted</span>
-                    </div>
-                    <hr class="my-2">
-                    <p class="mb-1 fw-semibold">Notes :</p>
-                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
-                    <hr class="my-2">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-warning">Medium</span></p>
-                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
-                        <i class="fa-solid fa-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="task-item">
-              <div class="task-box input-group shadow rounded">
-                <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
-                </div>
-                <input type="text" class="form-control fw-semibold task-name" value="Prepare project for Science class">
-                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task3">
-                  <i class="fa-solid fa-chevron-down"></i>
-                </button>
-              </div>
-            
-              <div class="collapse mt-2" id="task3" data-bs-parent="#tasksContainer">
-                <div class="card border-0 shadow">
-                  <div class="card-body small">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
-                      <span class="badge bg-secondary">Uncompleted</span>
-                    </div>
-                    <hr class="my-2">
-                    <p class="mb-1 fw-semibold">Notes :</p>
-                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
-                    <hr class="my-2">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-success">Low</span></p>
-                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
-                        <i class="fa-solid fa-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="task-item">
-              <div class="task-box input-group shadow rounded">
-                <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button" checked>
-                </div>
-                <input type="text" class="form-control fw-semibold task-name" value="Attend study group for English">
-                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task4">
-                  <i class="fa-solid fa-chevron-down"></i>
-                </button>
-              </div>
-            
-              <div class="collapse mt-2" id="task4" data-bs-parent="#tasksContainer">
-                <div class="card border-0 shadow">
-                  <div class="card-body small">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
-                      <span class="badge bg-secondary">Completed</span>
-                    </div>
-                    <hr class="my-2">
-                    <p class="mb-1 fw-semibold">Notes :</p>
-                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
-                    <hr class="my-2">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-danger">High</span></p>
-                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
-                        <i class="fa-solid fa-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="task-item">
-              <div class="task-box input-group shadow rounded">
-                <div class="input-group-text">
-                  <input class="form-check-input mt-0 task-checkbox" type="checkbox" role="button">
-                </div>
-                <input type="text" class="form-control fw-semibold task-name" value="Complete extra credit assignment">
-                <button class="btn border" type="button" data-bs-toggle="collapse" data-bs-target="#task5">
-                  <i class="fa-solid fa-chevron-down"></i>
-                </button>
-              </div>
-            
-              <div class="collapse mt-2" id="task5" data-bs-parent="#tasksContainer">
-                <div class="card border-0 shadow">
-                  <div class="card-body small">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: 2025-02-19</p>
-                      <span class="badge bg-secondary">Uncompleted</span>
-                    </div>
-                    <hr class="my-2">
-                    <p class="mb-1 fw-semibold">Notes :</p>
-                    <p class="mb-1 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati alias labore mollitia consectetur aliquam accusantium praesentium repellat nemo modi aut! Ullam quasi quos sunt dolor sint deleniti aliquam iusto est?</p>
-                    <hr class="my-2">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <p class="mb-1 fw-semibold"><i class="fa-regular fa-flag"></i> Priority: <span class="badge bg-success">Low</span></p>
-                      <button class="btn btn-outline-danger btn-sm mt-2 delete-task small">
-                        <i class="fa-solid fa-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <ul class="list-unstyled row g-2" id="tasksContainer"></ul>
         </div>
       </div>
     </div>
