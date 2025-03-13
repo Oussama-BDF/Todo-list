@@ -4,16 +4,17 @@ const listsContainer = document.getElementById("listsContainer");
 const taskForm = document.getElementById("taskForm");
 const tasksContainer = document.getElementById("tasksContainer");
 const listHeading = document.getElementById("listHeading");
-const deleteList = document.getElementById("deleteList");
+const deleteListButton = document.getElementById("deleteList");
 
-let listsData = getListsFromLocalStorage();
-let currentListName = Object.keys(listsData)[0] || "";
-let firstList = false;
+let listsData = loadListsFromLocalStorage();
+let currentListName = "";
+let hasFirstList = false;
 
 // ! Event Listeners
 document.addEventListener("DOMContentLoaded", init);
 listForm.addEventListener("submit", handleAddList);
-deleteList.addEventListener("click", handleDeleteList)
+deleteListButton.addEventListener("click", handleDeleteList);
+listHeading.addEventListener("focusout", handleRenameList);
 taskForm.addEventListener("submit", handleAddTask);
 tasksContainer.addEventListener("change", handleTaskCheck);
 tasksContainer.addEventListener("click", handleDeleteTask);
@@ -33,12 +34,12 @@ function init() {
 // * List Functions
 function handleAddList(e) {
     e.preventDefault();
-    const listName = this.listInput.value.trim();
+    const listName = this.listInput.value.trim().toLowerCase();
     if (!listName || listsData[listName]) return;
 
     // Add new list to the lists data object and update local storage
     listsData[listName] = [];
-    updateListsInLocalStorage();
+    saveListsToLocalStorage();
 
     // Add list to DOM and clear the input field
     addListToDom(listName);
@@ -46,31 +47,36 @@ function handleAddList(e) {
 }
 
 function addListToDom(listName) {
-    const incompleteTasks = listsData[listName].filter(task => !task.completed).length;
-
     const li = document.createElement("li");
     li.className = "list-item list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1 border-0 rounded bg-transparent text-light";
     li.setAttribute("role", "button");
-    li.setAttribute("data-list", listName);
-    li.innerHTML = `<span class="text text-truncate">${listName}</span><span class="circle badge text-bg-secondary rounded-pill">${incompleteTasks}</span>`;
-    li.addEventListener("click", () => updateActiveList(li));
+    li.dataset.list = listName;
 
+    li.innerHTML = `
+        <span class="text text-truncate">${listName}</span>
+        <span class="circle badge text-bg-secondary rounded-pill">${countIncompleteTasks(listName)}</span>
+    `;
+
+    li.addEventListener("click", () => updateActiveList(li));
     listsContainer.appendChild(li);
 
-    // Activate the first list
-    if (!firstList) {
-      firstList = true;
+    // For the first list
+    if (!hasFirstList) {
+      hasFirstList = true;
       updateActiveList(li);
+      document.querySelector(".tasks-header").classList.remove("d-none");
     }
 }
 
 function updateActiveList(listElement) {
+  if (!listElement || listElement.classList.contains("active")) return;
+
   // Remove "active" class from any currently active list item and add it to the clicked list item
   document.querySelectorAll(".list-item").forEach(li => li.classList.remove("active"));
   listElement.classList.add("active");
 
   // Update the current list name and the list heading
-  currentListName = listElement.getAttribute("data-list");
+  currentListName = listElement.dataset.list;
   listHeading.value = currentListName;
 
   // Clear the current task container and add tasks for the selected list
@@ -78,33 +84,44 @@ function updateActiveList(listElement) {
   listsData[currentListName].forEach(addTaskToDom);
 }
 
-// !Many things to fix here
-function handleEditList() {
+function handleRenameList() {
   const oldName = currentListName;
-  const newName = listHeading.value;
+  const newName = listHeading.value.trim().toLowerCase();
 
-  if (listsData.hasOwnProperty(newName)) return;
+  if (!newName || listsData(newName)) return;
 
   // Rename the key while preserving its value (tasks)
   listsData[newName] = listsData[oldName];
   delete listsData[oldName];
 
+  // Find and update the list name in the DOM
+  document.querySelector(`.list-item[data-list="${oldName}"] .text`).textContent = newName;
+  document.querySelector(`.list-item[data-list="${oldName}"]`).dataset.list = newName;
+
   // Update local storage
-  updateListsInLocalStorage();
+  saveListsToLocalStorage();
 }
 
 function handleDeleteList() {
   if (confirm("Are you sure you want to delete this list?")) {
+    // Delete the list from the local storage and from the DOM
     delete listsData[currentListName];
-    updateListsInLocalStorage();
+    saveListsToLocalStorage();
     document.querySelector(`.list-item[data-list="${currentListName}"]`).remove();
 
-    // Activate the first list
-    updateActiveList(document.querySelector(".list-item"))
+    if (Object.keys(listsData).length > 0) {
+      // Activate the first list
+      updateActiveList(document.querySelector(".list-item"));
+    } else {
+      // If there is no list
+      hasFirstList = false;
+      tasksContainer.innerHTML = "";
+      document.querySelector(".tasks-header").classList.add("d-none");
+    }
   }
 }
 
-function refreshListBadge() {
+function refreshTaskCount() {
   const list = document.querySelector(`.list-item[data-list="${currentListName}"] .badge`);
   const incompleteTasks = listsData[currentListName].filter(task => !task.completed).length;
   list.textContent = incompleteTasks;
@@ -116,12 +133,13 @@ function handleAddTask(e) {
     const taskName = this.taskInput.value.trim();
     const taskPriority = this.taskPre.value.trim();
     const taskNotes = this.taskNotes.value.trim();
+
     if (!taskName || !taskPriority || !taskNotes) return;
 
     // Add new task to the lists data object and update local storage
     const task = {id: Date.now(), taskName, completed: false, added: new Date().toLocaleString(), priority: taskPriority, notes: taskNotes}
     listsData[currentListName].push(task);
-    updateListsInLocalStorage();
+    saveListsToLocalStorage();
 
     // Add task to DOM and clear the input field
     addTaskToDom(task);
@@ -129,13 +147,12 @@ function handleAddTask(e) {
 
     // Close the modal
     bootstrap.Modal.getInstance(document.getElementById("taskModal"))?.hide();
-
 }
 
 function addTaskToDom(task) {
     const li = document.createElement("li");
     li.className = "task-item";
-    li.setAttribute("data-id", task.id);
+    li.dataset.id = task.id;
 
     li.innerHTML = 
     `<div class="task-box input-group shadow rounded">
@@ -151,7 +168,7 @@ function addTaskToDom(task) {
       <div class="card border-0 shadow">
         <div class="card-body small">
           <div class="d-flex align-items-center justify-content-between">
-            <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: ${task["added"]}</p>
+            <p class="mb-1 text-muted"><i class="fa-regular fa-calendar-alt"></i> Added: ${task.added}</p>
             <span class="badge bg-secondary task-status">
               ${task.completed ? "Completed" : "Uncompleted"}
             </span>
@@ -167,7 +184,7 @@ function addTaskToDom(task) {
                 ${task.priority}
               </span>
             </p>
-            <button class="btn btn-outline-danger btn-sm mt-2 delete-task small" data-id="${task.id}">
+            <button class="delete-task btn btn-outline-danger btn-sm mt-2 small" data-id="${task.id}">
               <i class="fa-solid fa-trash"></i> Delete
             </button>
           </div>
@@ -177,7 +194,7 @@ function addTaskToDom(task) {
 
     tasksContainer.appendChild(li);
 
-    refreshListBadge();
+    refreshTaskCount();
 }
 
 function handleTaskCheck(e) {
@@ -187,16 +204,16 @@ function handleTaskCheck(e) {
   const task = listsData[currentListName].find(task => task.id == taskId);
   if (task) {
     task.completed = e.target.checked;
-    updateListsInLocalStorage();
+    saveListsToLocalStorage();
     updateTaskStatus(taskId, task.completed);
-    refreshListBadge();
+    refreshTaskCount();
   }
 }
 
 function updateTaskStatus(taskId, isCompleted) {
-  const taskElement = document.querySelector(`#task-${taskId} .task-status`);
-  if (taskElement) {
-      taskElement.textContent = isCompleted ? "Completed" : "Uncompleted";
+  const taskStatus = document.querySelector(`.task-item[data-id="${taskId}"] .task-status`);
+  if (taskStatus) {
+      taskStatus.textContent = isCompleted ? "Completed" : "Uncompleted";
   }
 }
 
@@ -204,15 +221,15 @@ function handleDeleteTask(e) {
   if (!e.target.classList.contains("delete-task")) return;
 
   if (confirm("Are you sure you want to delete this task?")) {
-    const taskId = parseInt(e.target.closest(".delete-task").dataset.id);
+    const taskId = parseInt(e.target.dataset.id);
     deleteTask(taskId);
-    refreshListBadge();
+    refreshTaskCount();
   }
 }
 
 function deleteTask(taskId) {
   listsData[currentListName] = listsData[currentListName].filter(task => task.id !== taskId);
-  updateListsInLocalStorage();
+  saveListsToLocalStorage();
   document.querySelector(`.task-item[data-id="${taskId}"]`).remove();
 }
 
@@ -224,15 +241,19 @@ function handleEditTask(e) {
 
   if (task) {
     task.taskName = e.target.value;
-    updateListsInLocalStorage();
+    saveListsToLocalStorage();
   }
 }
 
+function countIncompleteTasks(listName) {
+  return listsData[listName].filter(task => !task.completed).length;
+}
+
 // * Global Functions
-function updateListsInLocalStorage() {
+function saveListsToLocalStorage() {
     localStorage.setItem("listsObj", JSON.stringify(listsData));
 }
 
-function getListsFromLocalStorage() {
+function loadListsFromLocalStorage() {
     return JSON.parse(localStorage.getItem("listsObj")) || {};
 }
