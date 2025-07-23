@@ -14,12 +14,12 @@
 
 <body class="d-flex align-items-center min-vh-100">
   <div class="container">
-    <div class="content row g-0 shadow-lg rounded-3">
+    <div class="content row g-0 shadow-lg rounded-3 overflow-hidden">
 
-      <div class="col-md-4 col-lg-3 h-100">
+      <div class="responsive-height col-12 col-md-4 col-lg-3">
         <div class="sidebar px-3 pb-4 bg-secondary h-100 overflow-y-auto">
 
-          <div class="sidebar-top position-sticky top-0 mb-3">
+          <div class="sidebar-top position-sticky top-0 mb-3 blur z-3">
             <h3 class="text-center text-primary mb-3 pt-4 h4">To-Do Lists <i class="fa-solid fa-list-check"></i></h3>
 
             <form class="" id="listForm">
@@ -36,16 +36,16 @@
         </div>
       </div>
 
-      <div class="col-md-8 col-lg-9 h-100">
+      <div class="responsive-height col-12 col-md-8 col-lg-9">
         <div class="main-content p-4 bg-white h-100 overflow-y-auto">
 
-          <div class="tasks-header d-flex justify-content-between w-100 mb-3 d-none">
+          <div class="tasks-header d-flex justify-content-between w-100 mb-3 d-none position-sticky top-0 blur z-3">
 
             <div class="input-group w-auto">
               <label for="listHeading" class="input-group-text rounded-start-pill" role="button">
                 <i class="fa-solid fa-pencil"></i>
               </label>
-              <input type="text" id="listHeading" class="rounded-end-pill list-heading form-control fw-bold text-dark bg-transparent fs-4 px-2 py-0" value="">
+              <input type="text" id="listHeading" class="list-heading rounded-end-pill form-control fw-bold text-dark bg-transparent fs-4 px-2 py-0 text-truncate" value="">
             </div>
 
             <div class="d-inline-flex bg-secondary rounded-pill p-1 shadow align-items-center">
