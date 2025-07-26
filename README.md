@@ -1,4 +1,4 @@
-# To-Do List App
+# To-Do List Web App
 
 A fully functional To-Do List web app built with Bootstrap and pure JavaScript.
 
